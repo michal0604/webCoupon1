@@ -43,7 +43,7 @@ public class AdminService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String login(@QueryParam("name") String name, @QueryParam("pass") String password) {
 		try {
-			
+			System.out.println("in Create");
 			CouponClientFacade facad = CouponSystem.login(name, password,ClientType.ADMIN);
 			if(facad != null) {
 				request.getSession(true).setAttribute("facade", facad);
@@ -59,11 +59,10 @@ public class AdminService {
 	}
 
 	@POST
-	@Path("createCompany")
+	@Path("/createCompany")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createCompany(@QueryParam("name") String compName, @QueryParam("pass") String password,
-			@QueryParam("email") String email) {
-
+	public String createCompany(@QueryParam("name") String compName, @QueryParam("pass") String password,@QueryParam("email") String email) {
+		System.out.println("in Create");
 		AdminFacad admin = getFacade();
 		Company company = new Company(compName, password, email);
 		try {
@@ -234,6 +233,12 @@ public class AdminService {
 			System.err.println("get customer by id failed " + e.getMessage());
 			return null;
 		}
+	}
+	
+	@GET
+	@Path("/rebuildDb")
+	public void rebuildDb() {
+		System.out.println("rebuild is hear");
 	}
 
 }
