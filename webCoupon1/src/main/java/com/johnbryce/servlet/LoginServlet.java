@@ -14,7 +14,6 @@ import com.johnbryce.facad.CouponClientFacade;
 import com.johnbryce.utils.ClientType;
 import com.johnbryce.utils.CouponSystem;
 
-//@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
 	private CouponSystem system;
@@ -54,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		ClientType type = ClientType.valueOf(clientType.toUpperCase()); // convert String to ENUM
 
 		try {
-			CouponClientFacade facade = system.login(username, password, type);
+			CouponClientFacade facade = CouponSystem.login(username, password, type);
 			if (facade != null) {
 				// updating the session with the login facade
 				session.setAttribute("facade", facade);

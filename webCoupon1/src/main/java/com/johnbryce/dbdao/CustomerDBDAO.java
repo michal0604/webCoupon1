@@ -60,6 +60,7 @@ public class CustomerDBDAO implements CustomerDAO {
 		String sql = "insert into Customer(CUST_NAME, PASSWORD) values (?,?)";
 
 		try {
+			System.out.println(sql);
 			PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, Customer.getCustomerName());
 			pstmt.setString(2, Customer.getPassword());
@@ -139,7 +140,7 @@ public class CustomerDBDAO implements CustomerDAO {
 	 *            customer to update
 	 */
 	@Override
-	public long updateCustomer(Customer Customer) throws UpdateException {
+	public void updateCustomer(Customer Customer) throws UpdateException {
 		Connection connection;
 		try {
 			connection = pool.getConnection();
@@ -150,14 +151,8 @@ public class CustomerDBDAO implements CustomerDAO {
 		String sql = "UPDATE Customer " + " SET CUST_NAME='" + Customer.getCustomerName() + "', PASSWORD='"
 				+ Customer.getPassword() + "' WHERE ID=" + Customer.getCustomerId();
 		try {
-			PreparedStatement pstm1 = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement pstm1 = connection.prepareStatement(sql);
 			pstm1.executeUpdate();
-			ResultSet rs = pstm1.getGeneratedKeys();
-			long generatedKey = 0;
-			if (rs.next()) {
-				generatedKey = rs.getLong(1);
-			}
-			return generatedKey;
 		} catch (SQLException e) {
 			throw new UpdateException("update Customer failed " + e.getMessage());
 		} finally {
