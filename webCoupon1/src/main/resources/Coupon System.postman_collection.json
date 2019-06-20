@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "253b21ae-d93a-447a-ac4a-95efc1c056c9",
+		"name": "Coupon System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin runner",
+			"item": [
+				{
+					"name": "login admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/webCoupon1/login?name=admin&pass=1234&type=admin",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"webCoupon1",
+								"login"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "admin"
+								},
+								{
+									"key": "pass",
+									"value": "1234"
+								},
+								{
+									"key": "type",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add company (PIZZAHUT)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=PIZZAHUT&pass=1111&email=pizza@pizzaHut.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCompany"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "PIZZAHUT"
+								},
+								{
+									"key": "pass",
+									"value": "1111"
+								},
+								{
+									"key": "email",
+									"value": "pizza@pizzaHut.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add company (HOLMCE-PLACE)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=HOLMCE-PLACE&pass=112&email=holmesplace@gmail.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCompany"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "HOLMCE-PLACE"
+								},
+								{
+									"key": "pass",
+									"value": "112"
+								},
+								{
+									"key": "email",
+									"value": "holmesplace@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add company (ELECTRA)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=ELECTRA&pass=113&email=electra@electra.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCompany"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "ELECTRA"
+								},
+								{
+									"key": "pass",
+									"value": "113"
+								},
+								{
+									"key": "email",
+									"value": "electra@electra.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add company (WALLA-TOURS)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=WALLA-TOURS&pass=114&email=tours@walla.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCompany"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "WALLA-TOURS"
+								},
+								{
+									"key": "pass",
+									"value": "114"
+								},
+								{
+									"key": "email",
+									"value": "tours@walla.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add company (FOX)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=FOX&pass=115&email=FOX@yahoo.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCompany"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "FOX"
+								},
+								{
+									"key": "pass",
+									"value": "115"
+								},
+								{
+									"key": "email",
+									"value": "FOX@yahoo.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Customer (Michal)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Michal&pass=2001",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCustomer"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Michal"
+								},
+								{
+									"key": "pass",
+									"value": "2001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Customer (Eli)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Eli&pass=2002",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCustomer"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Eli"
+								},
+								{
+									"key": "pass",
+									"value": "2002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Customer (Hana)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Hana&pass=2003",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCustomer"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Hana"
+								},
+								{
+									"key": "pass",
+									"value": "2003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Customer (Karin)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Karin&pass=2004",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCustomer"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Karin"
+								},
+								{
+									"key": "pass",
+									"value": "2004"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Customer (Gila)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Gila&pass=2005",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"createCustomer"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Gila"
+								},
+								{
+									"key": "pass",
+									"value": "2005"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin test",
+			"item": [
+				{
+					"name": "remove company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/removeCompany/2",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"removeCompany",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Company",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/updateCompany?compId=3&pass=333&email=farm@gmail.com",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"updateCompany"
+							],
+							"query": [
+								{
+									"key": "compId",
+									"value": "3"
+								},
+								{
+									"key": "pass",
+									"value": "333"
+								},
+								{
+									"key": "email",
+									"value": "farm@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/getCompany/3",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"getCompany",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/getAllCompanies",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"getAllCompanies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/removeCustomer/3",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"removeCustomer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/updateCustomer?custId=3&pass=2019",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"updateCustomer"
+							],
+							"query": [
+								{
+									"key": "custId",
+									"value": "3"
+								},
+								{
+									"key": "pass",
+									"value": "2019"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/getCustomer/3",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"getCustomer",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/getAllCustomers",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"getAllCustomers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rebuild DataBase",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{admin.pass}}/rebuildDb",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{admin.pass}}",
+								"rebuildDb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
