@@ -6,10 +6,10 @@
 	},
 	"item": [
 		{
-			"name": "admin runner",
+			"name": "runner Admin",
 			"item": [
 				{
-					"name": "login admin",
+					"name": "login Admin",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -50,13 +50,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=PIZZAHUT&pass=1111&email=pizza@pizzaHut.com",
+							"raw": "http://{{host}}/{{admin.path}}/createCompany?name=PIZZAHUT&pass=1111&email=pizza@pizzaHut.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCompany"
 							],
 							"query": [
@@ -83,13 +83,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=HOLMCE-PLACE&pass=112&email=holmesplace@gmail.com",
+							"raw": "http://{{host}}/{{admin.path}}/createCompany?name=HOLMCE-PLACE&pass=112&email=holmesplace@gmail.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCompany"
 							],
 							"query": [
@@ -120,13 +120,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=ELECTRA&pass=113&email=electra@electra.com",
+							"raw": "http://{{host}}/{{admin.path}}/createCompany?name=ELECTRA&pass=113&email=electra@electra.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCompany"
 							],
 							"query": [
@@ -153,13 +153,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=WALLA-TOURS&pass=114&email=tours@walla.com",
+							"raw": "http://{{host}}/{{admin.path}}/createCompany?name=WALLA-TOURS&pass=114&email=tours@walla.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCompany"
 							],
 							"query": [
@@ -186,13 +186,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCompany?name=FOX&pass=115&email=FOX@yahoo.com",
+							"raw": "http://{{host}}/{{admin.path}}/createCompany?name=FOX&pass=115&email=FOX@yahoo.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCompany"
 							],
 							"query": [
@@ -219,13 +219,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Michal&pass=2001",
+							"raw": "http://{{host}}/{{admin.path}}/createCustomer?name=Michal&pass=2001",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCustomer"
 							],
 							"query": [
@@ -248,13 +248,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Eli&pass=2002",
+							"raw": "http://{{host}}/{{admin.path}}/createCustomer?name=Eli&pass=2002",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCustomer"
 							],
 							"query": [
@@ -277,13 +277,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Hana&pass=2003",
+							"raw": "http://{{host}}/{{admin.path}}/createCustomer?name=Hana&pass=2003",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCustomer"
 							],
 							"query": [
@@ -306,13 +306,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Karin&pass=2004",
+							"raw": "http://{{host}}/{{admin.path}}/createCustomer?name=Karin&pass=2004",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCustomer"
 							],
 							"query": [
@@ -335,13 +335,13 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/createCustomer?name=Gila&pass=2005",
+							"raw": "http://{{host}}/{{admin.path}}/createCustomer?name=Gila&pass=2005",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"createCustomer"
 							],
 							"query": [
@@ -361,7 +361,144 @@
 			]
 		},
 		{
-			"name": "admin test",
+			"name": "runnet Company",
+			"item": [
+				{
+					"name": "login Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/webCoupon1/login?name=PIZZAHUT&pass=1111&type=company",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"webCoupon1",
+								"login"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "PIZZAHUT"
+								},
+								{
+									"key": "pass",
+									"value": "1111"
+								},
+								{
+									"key": "type",
+									"value": "company"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Coupon (Deal-1)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Deal-01\",\n\t\"start_date\":\"2019-06-23\",\n\t\"end_date\":\"2019-06-30\",\n\t\"amount\": 5,\n\t\"type\":\"Food\",\n\t\"message\":\"Best Deal\",\n\t\"price\":69.90,\n\t\"image\":\"http//www.pizzahatCoupon.co.il/?1\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/createCoupon",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"createCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Coupon (Deal-2)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Deal-02\",\n\t\"start_date\":\"2019-06-23\",\n\t\"end_date\":\"2019-06-28\",\n\t\"amount\": 4,\n\t\"type\":\"Resturans\",\n\t\"message\":\"Best Deal\",\n\t\"price\":79.90,\n\t\"image\":\"http//www.pizzahatCoupon.co.il/?2\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/createCoupon",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"createCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add Coupon (Deal-3)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Deal-03\",\n\t\"start_date\":\"2019-06-23\",\n\t\"end_date\":\"2019-06-26\",\n\t\"amount\": 10,\n\t\"type\":\"Food\",\n\t\"message\":\"Best Deal\",\n\t\"price\":111.90,\n\t\"image\":\"http//www.pizzahatCoupon.co.il/?3\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/createCoupon",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"createCoupon"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "test Admin",
 			"item": [
 				{
 					"name": "remove company",
@@ -369,13 +506,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/removeCompany/2",
+							"raw": "http://{{host}}/{{admin.path}}/removeCompany/2",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"removeCompany",
 								"2"
 							]
@@ -389,13 +526,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/updateCompany?compId=3&pass=333&email=farm@gmail.com",
+							"raw": "http://{{host}}/{{admin.path}}/updateCompany?compId=3&pass=333&email=farm@gmail.com",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"updateCompany"
 							],
 							"query": [
@@ -422,13 +559,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/getCompany/3",
+							"raw": "http://{{host}}/{{admin.path}}/getCompany/3",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"getCompany",
 								"3"
 							]
@@ -442,13 +579,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/getAllCompanies",
+							"raw": "http://{{host}}/{{admin.path}}/getAllCompanies",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"getAllCompanies"
 							]
 						}
@@ -461,13 +598,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/removeCustomer/3",
+							"raw": "http://{{host}}/{{admin.path}}/removeCustomer/3",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"removeCustomer",
 								"3"
 							]
@@ -481,13 +618,13 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/updateCustomer?custId=3&pass=2019",
+							"raw": "http://{{host}}/{{admin.path}}/updateCustomer?custId=3&pass=2019",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"updateCustomer"
 							],
 							"query": [
@@ -510,13 +647,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/getCustomer/3",
+							"raw": "http://{{host}}/{{admin.path}}/getCustomer/3",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"getCustomer",
 								"3"
 							]
@@ -530,13 +667,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/getAllCustomers",
+							"raw": "http://{{host}}/{{admin.path}}/getAllCustomers",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"getAllCustomers"
 							]
 						}
@@ -549,14 +686,188 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://{{host}}/{{admin.pass}}/rebuildDb",
+							"raw": "http://{{host}}/{{admin.path}}/rebuildDb",
 							"protocol": "http",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"{{admin.pass}}",
+								"{{admin.path}}",
 								"rebuildDb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Company",
+			"item": [
+				{
+					"name": "remove Coupon",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/removeCoupon/2",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"removeCoupon",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Coupon",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"couponId\":4,\n\t\"title\":\"Deal-03b\",\n\t\"start_date\":\"2019-06-23\",\n\t\"end_date\":\"2019-06-27\",\n\t\"amount\": 7,\n\t\"type\":\"Food\",\n\t\"message\":\"Best Deal ever\",\n\t\"price\":99.90,\n\t\"image\":\"http//www.pizzahatCoupon.co.il/?3a\"\n}"
+						},
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/updateCoupon",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"updateCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Company",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getCompany/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getCompany",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Coupon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getCoupon/3",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getCoupon",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Coupons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getCoupons",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getCoupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Coupons By Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getAllCouponsByType/Food",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getAllCouponsByType",
+								"Food"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Coupons By Max Coupon Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getCouponsByMaxCouponPrice/100",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getCouponsByMaxCouponPrice",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Coupons By Max Coupon Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/{{company.path}}/getCouponsByMaxCouponDate/\"2019-06-23\"",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{company.path}}",
+								"getCouponsByMaxCouponDate",
+								"\"2019-06-23\""
 							]
 						}
 					},

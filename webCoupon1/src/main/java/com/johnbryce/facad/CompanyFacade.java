@@ -101,7 +101,6 @@ public class CompanyFacade implements CouponClientFacade {
 				if (startDate.getTime() <= endDate.getTime()) {
 					if (startDate.getTime() >= Utile.getCurrentDate().getTime()) {
 						if (!couponDAO.isCouponTitleExists(CoupTitle)) {
-							couponDAO.insertCoupon(coupon);
 							long id = couponDAO.insertCoupon(coupon);
 							if(id != 0) {
 								coupon = couponDAO.getCoupon(id);
@@ -167,14 +166,8 @@ public class CompanyFacade implements CouponClientFacade {
 					Date endDate = (Date) coupon.getEnd_date();
 					if (startDate.getTime() <= endDate.getTime()) {
 						couponDAO.updateCoupon(coupon);
-						long id = couponDAO.insertCoupon(coupon);
-						if(id != 0) {
-							System.out.println("update coupon by company succsess!!");
-							return couponDAO.getCoupon(id);
-						}else {
-							throw new CouponException("Update Coupon failed by company!");
-						}
-
+						System.out.println("update coupon by company succsess!!");
+						return couponDAO.getCoupon(couponId);
 					} else {
 						System.out.println(" Update Coupon failed by company!");
 					}

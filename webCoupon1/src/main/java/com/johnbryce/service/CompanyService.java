@@ -7,11 +7,14 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -20,6 +23,9 @@ import com.johnbryce.beans.Company;
 import com.johnbryce.beans.Coupon;
 import com.johnbryce.beans.CouponType;
 import com.johnbryce.facad.CompanyFacade;
+import com.johnbryce.facad.CouponClientFacade;
+import com.johnbryce.utils.ClientType;
+import com.johnbryce.utils.CouponSystem;
 
 @Path("company")
 public class CompanyService {
@@ -33,6 +39,25 @@ public class CompanyService {
 
 		CompanyFacade company = (CompanyFacade) request.getSession(false).getAttribute("facade");
 		return company;
+	}
+	
+	@GET
+	@Path("/login")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String login(@QueryParam("name") String name, @QueryParam("pass") String password) {
+		try {
+			CouponClientFacade facad = CouponSystem.login(name, password,ClientType.COMPANY);
+			if(facad != null) {
+				request.getSession(true).setAttribute("facade", facad);
+				return "succesfull login";
+			}
+			else {
+				return "faild login - wrong user or password";
+			}
+		} catch (Exception e) {
+			return "faild login "+ e.getMessage();
+		}
+
 	}
 
 	@POST
@@ -50,10 +75,10 @@ public class CompanyService {
 
 	}
 
-	@GET
-	@Path("removeCompany")
+	@DELETE
+	@Path("removeCoupon/{compId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCompany(@PathParam("compId") long id) {
+	public String removeCoupon(@PathParam("compId") long id) {
 
 		CompanyFacade companyFacade = getFacade();
 		try {
@@ -65,7 +90,7 @@ public class CompanyService {
 
 	}
 
-	@POST
+	@PUT
 	@Path("updateCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,7 +109,8 @@ public class CompanyService {
 				oldCoupon.setPrice(coupon.getPrice());
 				oldCoupon.setImage(coupon.getImage());
 				oldCoupon = companyFacade.updateCoupon(oldCoupon);
-				return new Gson().toJson(coupon);
+				
+				return new Gson().toJson(oldCoupon);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
 			}
@@ -111,7 +137,7 @@ public class CompanyService {
 	}
 
 	@GET
-	@Path("getCoupon")
+	@Path("getCoupon/{compId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCoupon(@PathParam("compId") long id) {
 		CompanyFacade companyFacade = getFacade();
@@ -144,8 +170,8 @@ public class CompanyService {
 	}
 	
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getAllCouponsByType")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getAllCouponsByType/{type}")
 	public String getAllCouponsByType(@PathParam("type")CouponType type) {
 		CompanyFacade companyFacade = getFacade();
 		Set<Coupon>  allCouponsByType=new HashSet<>();
@@ -159,8 +185,8 @@ public class CompanyService {
 	}
 	
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getCouponsByMaxCouponPrice")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getCouponsByMaxCouponPrice/{price}")
 	public String getCouponsByMaxCouponPrice(@PathParam("price") double price) {
 		CompanyFacade companyFacade = getFacade();
 		Set<Coupon>  allCouponsByType=new HashSet<>();
@@ -174,8 +200,8 @@ public class CompanyService {
 	}
 	
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getCouponsByMaxCouponDate")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getCouponsByMaxCouponDate/{date}")
 	public String getCouponsByMaxCouponDate(@PathParam("date") Date date) {
 		CompanyFacade companyFacade = getFacade();
 		Set<Coupon>  allCouponsByType=new HashSet<>();

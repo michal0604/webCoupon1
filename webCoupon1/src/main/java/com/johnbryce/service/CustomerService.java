@@ -32,9 +32,9 @@ public class CustomerService {
 	}
 	
 	@POST
-	@Path("/purchaseCoupon")
+	@Path("purchaseCoupon/{coupid}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String purchaseCoupon(@QueryParam ("coupId")long coupId)
+	public String purchaseCoupon(@PathParam ("coupId")long coupId)
 	{
 		CustomerFacad customer= getFacad();
 		Coupon coupon= new Coupon();

@@ -46,7 +46,6 @@ public class AdminService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String login(@QueryParam("name") String name, @QueryParam("pass") String password) {
 		try {
-			System.out.println("in Create");
 			CouponClientFacade facad = CouponSystem.login(name, password,ClientType.ADMIN);
 			if(facad != null) {
 				request.getSession(true).setAttribute("facade", facad);
@@ -245,7 +244,7 @@ public class AdminService {
 		AdminFacad admin = getFacade();
 		try {
 			admin.rebuildDb();
-		} catch (CouponException | RemoveException | SQLException | CreateException e) {
+		} catch (Exception e) {
 			System.err.println("rebuild db has failed " + e.getMessage());
 		}	
 	}
