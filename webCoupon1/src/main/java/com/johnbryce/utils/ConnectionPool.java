@@ -23,7 +23,7 @@ public class ConnectionPool {
 
 	private ConnectionPool() throws CouponException {
 		try {
-			Class.forName(Utile.getDriverData());
+			Class.forName(DataBase.getDriverData());
 		} catch (Exception e) {
 			throw new CouponException(e.getMessage());
 		}
@@ -31,6 +31,8 @@ public class ConnectionPool {
 		try {
 			con = DriverManager.getConnection(DataBase.getDBUrl());
 		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			throw new CouponException("connection failed");
 		}
 		try {
@@ -92,7 +94,7 @@ public class ConnectionPool {
 			connections.offer(connection);
 			notifyAll();
 		} catch (Exception e) {
-			throw new CouponException("return connection failed"+e.getMessage());
+			throw new CouponException("return connection failed "+e.getMessage());
 		}
 	}
 

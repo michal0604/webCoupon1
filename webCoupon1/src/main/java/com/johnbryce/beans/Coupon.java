@@ -1,6 +1,6 @@
 package com.johnbryce.beans;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * this is the object representing Coupon data

@@ -104,7 +104,6 @@ public class DataBase {
 				Pool.returnConnection(connection);
 			} catch (CouponException e) {
 				throw new RemoveException("connection failed");
-
 			}
         }
 	}

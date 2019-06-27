@@ -43,7 +43,7 @@ public interface CompanyDAO {
 	 * @return 
 	 * @throws CompanyException for error related to the retrieval of the company
 	 */
-	long updateCompany(Company company) throws   CompanyException;
+	void updateCompany(Company company) throws   CompanyException;
 
 	/**
 	 * get a company data set by the company's id.
