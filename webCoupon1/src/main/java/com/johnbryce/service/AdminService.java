@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -60,12 +61,11 @@ public class AdminService {
 
 	@POST
 	@Path("createCompany")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createCompany(@QueryParam("name") String compName, @QueryParam("pass") String password,
-			@QueryParam("email") String email) {
+	public String createCompany(Company company) {
 
 		AdminFacad admin = getFacade();
-		Company company = new Company(compName, password, email);
 		try {
 			company = admin.createCompany(company);
 			return new Gson().toJson(company);
@@ -97,16 +97,16 @@ public class AdminService {
 
 	@PUT
 	@Path("updateCompany")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateCompany(@QueryParam("compId") long id, @QueryParam("pass") String password,
-			@QueryParam("email") String email) {
+	public String updateCompany(Company newCompany) {
 
 		AdminFacad admin = getFacade();
 		try {
-			Company company = admin.getCompany(id);
-			if (company != null) {
-				company = admin.updateCompany(company, password, email);
-				return new Gson().toJson(company);
+			Company oldCompany = admin.getCompany(newCompany.getCompanyId());
+			if (oldCompany != null) {
+				newCompany = admin.updateCompany(oldCompany, newCompany.getPassword(), newCompany.getEmail());
+				return new Gson().toJson(newCompany);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
 			}
@@ -151,11 +151,11 @@ public class AdminService {
 
 	@POST
 	@Path("createCustomer")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String Customer(@QueryParam("name") String custName, @QueryParam("pass") String password) {
+	public String Customer(Customer customer) {
 
 		AdminFacad admin = getFacade();
-		Customer customer = new Customer(custName, password);
 		try {
 			customer = admin.createCustomer(customer);
 			return new Gson().toJson(customer);
@@ -185,16 +185,17 @@ public class AdminService {
 
 	}
 
-	@GET
+	@PUT
 	@Path("updateCustomer")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateCustomer(@QueryParam("custId") long id, @QueryParam("pass") String password) {
+	public String updateCustomer(Customer newCostomer) {
 		AdminFacad admin = getFacade();
 		try {
-			Customer customer = admin.getCustomer(id);
-			if (customer != null) {
-				customer = admin.updateCustomer(customer, password);
-				return new Gson().toJson(customer);
+			Customer oldCustomer = admin.getCustomer(newCostomer.getCustomerId());
+			if (oldCustomer != null) {
+				newCostomer = admin.updateCustomer(oldCustomer, newCostomer.getPassword());
+				return new Gson().toJson(newCostomer);
 			} else {
 				return "Failed to update a customer: the provided customer id is invalid";
 			}
