@@ -31,7 +31,7 @@ public class Customer {
 	}
 
 	public Customer(String custName, String password) {
-		setCustomerName(customerName);
+		setCustomerName(custName);
 		setPassword(password);
 	}
 

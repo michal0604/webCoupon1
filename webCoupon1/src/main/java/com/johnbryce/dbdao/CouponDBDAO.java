@@ -151,7 +151,7 @@ public class CouponDBDAO implements CouponDAO {
 	 *             for problems in inserting the coupon to the DB
 	 */
 	@Override
-	public long updateCoupon(Coupon Coupon) throws UpdateException, CreateException {
+	public void updateCoupon(Coupon Coupon) throws UpdateException, CreateException {
 		Connection connection = null;
 		try {
 			connection = pool.getConnection();
@@ -161,7 +161,7 @@ public class CouponDBDAO implements CouponDAO {
 		try {
 			String sql = "UPDATE Coupon SET TITLE=?, START_DATE=?, END_DATE=?, AMOUNT=?,"
 					+ " TYPE=?, MESSAGE=?, PRICE=?, IMAGE=? WHERE ID=?";
-			PreparedStatement stm1 = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stm1 = connection.prepareStatement(sql);
 			stm1.setString(1, Coupon.getTitle());
 			stm1.setDate(2, (Date) Coupon.getStart_date());
 			stm1.setDate(3, (Date) Coupon.getEnd_date());
@@ -172,12 +172,6 @@ public class CouponDBDAO implements CouponDAO {
 			stm1.setString(8, Coupon.getImage());
 			stm1.setLong(9, Coupon.getCouponId());
 			stm1.executeUpdate();
-			ResultSet rs = stm1.getGeneratedKeys();
-			long generatedKey = 0;
-			if (rs.next()) {
-			    generatedKey = rs.getLong(1);
-			}
-			return generatedKey;
 		} catch (SQLException e) {
 			throw new UpdateException("update Coupon failed " + e.getMessage());
 		} finally {

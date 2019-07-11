@@ -44,7 +44,6 @@ public class AdminService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String login(@QueryParam("name") String name, @QueryParam("pass") String password) {
 		try {
-			
 			CouponClientFacade facad = CouponSystem.login(name, password,ClientType.ADMIN);
 			if(facad != null) {
 				request.getSession(true).setAttribute("facade", facad);
@@ -76,7 +75,7 @@ public class AdminService {
 	}
 
 	@DELETE
-	@Path("removeCompany")
+	@Path("removeCompany/{compId}")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String removeCompany(@PathParam("compId") long id) {
 
@@ -132,7 +131,7 @@ public class AdminService {
 	}
 
 	@GET
-	@Path("getCompany")
+	@Path("getCompany/{compId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCompany(@PathParam("compId") long id) {
 		AdminFacad admin = getFacade();
@@ -164,10 +163,10 @@ public class AdminService {
 		}
 	}
 
-	@GET
-	@Path("removeCustomer")
+	@DELETE
+	@Path("removeCustomer/{custId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCustomer(@QueryParam("custId") long id) {
+	public String removeCustomer(@PathParam("custId") long id) {
 
 		AdminFacad admin = getFacade();
 
@@ -220,9 +219,9 @@ public class AdminService {
 	}
 
 	@GET
-	@Path("getCustomer")
+	@Path("getCustomer/{custId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCustomer(@QueryParam("custId") long id) {
+	public String getCustomer(@PathParam("custId") long id) {
 		AdminFacad admin = getFacade();
 		try {
 			Customer customer = admin.getCustomer(id);
@@ -235,6 +234,17 @@ public class AdminService {
 			System.err.println("get customer by id failed " + e.getMessage());
 			return null;
 		}
+	}
+	
+	@GET
+	@Path("rebuildDb")
+	public void rebuildDb() {
+		AdminFacad admin = getFacade();
+		try {
+			admin.rebuildDb();
+		} catch (Exception e) {
+			System.err.println("rebuild db has failed " + e.getMessage());
+		}	
 	}
 
 }
