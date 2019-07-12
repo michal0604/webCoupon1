@@ -19,11 +19,12 @@ import com.johnbryce.exception.CreateException;
 import com.johnbryce.exception.CustomerException;
 import com.johnbryce.exception.RemoveException;
 import com.johnbryce.exception.UpdateException;
+import com.johnbryce.utils.DataBase;
 
 /**
  * @author Eivy & Michal
  * 
- * Administrator Facade
+ *         Administrator Facade
  *
  */
 public class AdminFacad implements CouponClientFacade {
@@ -37,6 +38,7 @@ public class AdminFacad implements CouponClientFacade {
 
 	/**
 	 * Constructor
+	 * 
 	 * @throws CouponException
 	 */
 	public AdminFacad() throws CouponException {
@@ -45,14 +47,16 @@ public class AdminFacad implements CouponClientFacade {
 		this.customer_CouponDAO = new Customer_CouponDBDAO();
 		this.company_CouponDAO = new Company_CouponDBDAO();
 	}
-	
+
 	/**
 	 * this method check password of admin, if true return admin.
-	 * @param name String 
-	 * @param password String 
+	 * 
+	 * @param name
+	 *            String
+	 * @param password
+	 *            String
 	 *
 	 */
-
 
 	public CouponClientFacade login(String name, String password) {
 		if (name.equals(AdminFacad.ADMIN_USER_NAME) && password.equals(AdminFacad.ADMIN_PASSWORD)) {
@@ -65,6 +69,7 @@ public class AdminFacad implements CouponClientFacade {
 
 	/**
 	 * this method create a company, at first need to check if company exist.
+	 * 
 	 * @param company
 	 * @throws CouponException
 	 */
@@ -80,18 +85,18 @@ public class AdminFacad implements CouponClientFacade {
 					try {
 						if (!companyDAO.isCompanyNameExists(compName)) {
 							long id = companyDAO.insertCompany(company);
-							
-							if(id != 0) {
+
+							if (id != 0) {
 								return companyDAO.getCompany(id);
-							}else {
+							} else {
 								throw new CouponException("create company failed by admin id =0");
 							}
-							
+
 						} else {
 							throw new CouponException("create company failed by admin name");
 						}
 					} catch (SQLException e) {
-						throw new CouponException("create company failed by admin "+e.getMessage());
+						throw new CouponException("create company failed by admin " + e.getMessage());
 					}
 				}
 			}
@@ -100,9 +105,10 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 *  This method get Company as object and take all its coupons and delete all the coupons
-	 * from Company_Coupon table & Customer_Coupon table & Coupon table. in addition, we delete
-	 * the company in the Company table.
+	 * This method get Company as object and take all its coupons and delete all the
+	 * coupons from Company_Coupon table & Customer_Coupon table & Coupon table. in
+	 * addition, we delete the company in the Company table.
+	 * 
 	 * @param company
 	 * @throws CouponException
 	 */
@@ -126,27 +132,25 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 *  This method get Company as object and send it to method that update line in the Company table.
-	 * The method don't update the name.
-	 * @param Company
+	 * This method get Company as object and send it to method that update line in
+	 * the Company table. The method don't update the name.
+	 * 
+	 * @param company
 	 * @param newpassword
 	 * @param newEmail
 	 * @throws CouponException
 	 */
-	public Company updateCompany(Company Company, String newpassword, String newEmail) throws CouponException {
+	public Company updateCompany(Company company, String newpassword, String newEmail) throws CouponException {
 		if (!isLogedIn) {
 			throw new CouponException("the operation was canceled due to not being loged in");
 		}
 
-		Company.setPassword(newpassword);
-		Company.setEmail(newEmail);
+		company.setPassword(newpassword);
+		company.setEmail(newEmail);
 		try {
-			long id = companyDAO.updateCompany(Company);
-			if(id != 0) {
-				return companyDAO.getCompany(id);
-			}else {
-				throw new CouponException("create company failed by admin");
-			}
+			companyDAO.updateCompany(company);
+			return companyDAO.getCompany(company.getCompanyId());
+
 		} catch (CompanyException | SQLException e) {
 			throw new CouponException("update company by admin failed");
 		}
@@ -154,7 +158,9 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 * This method get company id and return the line from Company table as Company object.
+	 * This method get company id and return the line from Company table as Company
+	 * object.
+	 * 
 	 * @param id
 	 * @return
 	 * @throws CouponException
@@ -174,6 +180,7 @@ public class AdminFacad implements CouponClientFacade {
 
 	/**
 	 * This method return all the Companies as a list.
+	 * 
 	 * @return
 	 * @throws CouponException
 	 */
@@ -190,8 +197,9 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 * This method get Customer as object and send it to create line in Customer table.
-	 * first we check that the name not exist.
+	 * This method get Customer as object and send it to create line in Customer
+	 * table. first we check that the name not exist.
+	 * 
 	 * @param customer
 	 * @throws CouponException
 	 */
@@ -207,12 +215,12 @@ public class AdminFacad implements CouponClientFacade {
 						if (!customerDAO.isCustomerNameExists(custName)) {
 							customerDAO.insertCustomer(customer);
 							long id = customerDAO.insertCustomer(customer);
-							if(id != 0) {
+							if (id != 0) {
 								return customerDAO.getCustomer(id);
-							}else {
+							} else {
 								throw new CouponException("create customer failed by admin");
 							}
-							
+
 						}
 					} catch (CustomerException e) {
 						throw new CouponException("create customer by admin failed");
@@ -227,8 +235,10 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 *  This method get Customer as object and take all its coupons and delete all the lines with those coupons
-	 * from Customer_Coupon table and the line from Customer table
+	 * This method get Customer as object and take all its coupons and delete all
+	 * the lines with those coupons from Customer_Coupon table and the line from
+	 * Customer table
+	 * 
 	 * @param customer
 	 * @throws CouponException
 	 */
@@ -250,8 +260,9 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 *  This method get Customer,and new password as object and send it to method that update line in the Customer table.
-	 * The method don't update the name
+	 * This method get Customer,and new password as object and send it to method
+	 * that update line in the Customer table. The method don't update the name
+	 * 
 	 * @param customer
 	 * @param newpassword
 	 * @throws CouponException
@@ -262,12 +273,8 @@ public class AdminFacad implements CouponClientFacade {
 		}
 		customer.setPassword(newpassword);
 		try {
-			long id = customerDAO.updateCustomer(customer);
-			if(id != 0) {
-				return customerDAO.getCustomer(id);
-			}else {
-				throw new CouponException("\"update customer by admin failed");
-			}
+			customerDAO.updateCustomer(customer);
+			return customerDAO.getCustomer(customer.getCustomerId());
 		} catch (UpdateException | CustomerException e) {
 			throw new CouponException("update customer by admin failed");
 		}
@@ -275,7 +282,8 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 *  This method return all the Customers as a list.
+	 * This method return all the Customers as a list.
+	 * 
 	 * @return
 	 * @throws CouponException
 	 */
@@ -291,7 +299,9 @@ public class AdminFacad implements CouponClientFacade {
 	}
 
 	/**
-	 * This method get Customer id and return the line from Customer table as Customer object.
+	 * This method get Customer id and return the line from Customer table as
+	 * Customer object.
+	 * 
 	 * @param id
 	 * @return
 	 * @throws CouponException
@@ -305,6 +315,14 @@ public class AdminFacad implements CouponClientFacade {
 		} catch (CustomerException e) {
 			throw new CouponException("get customer by admin failed");
 		}
+	}
+
+	public void rebuildDb() throws CouponException, RemoveException, SQLException, CreateException {
+		if (!isLogedIn) {
+			throw new CouponException("the operation was canceled due to not being loged in");
+		}
+		DataBase.dropTableifNeeded();
+		DataBase.createTables();
 	}
 
 }
