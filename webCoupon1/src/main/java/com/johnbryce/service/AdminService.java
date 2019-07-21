@@ -3,6 +3,7 @@ package com.johnbryce.service;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
@@ -56,6 +57,7 @@ public class AdminService {
 		} catch (Exception e) {
 			return "faild login "+ e.getMessage();
 		}
+		
 
 	}
 
@@ -63,17 +65,25 @@ public class AdminService {
 	@Path("createCompany")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createCompany(Company company) {
-
-		AdminFacad admin = getFacade();
+	public String createCompany(Company company) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
+			System.out.println("The Company name is: ");
+			
 			company = admin.createCompany(company);
+			
 			return new Gson().toJson(company);
 		} catch (CouponException e) {
+				
 			return "Failed to Add a new Company:" + e.getMessage();
+			
+			
 		}
-
+		
+		
 	}
+
 
 	@DELETE
 	@Path("removeCompany")
@@ -99,9 +109,9 @@ public class AdminService {
 	@Path("updateCompany")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateCompany(Company newCompany) {
-
-		AdminFacad admin = getFacade();
+	public String updateCompany(Company newCompany) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
 			Company oldCompany = admin.getCompany(newCompany.getCompanyId());
 			if (oldCompany != null) {
@@ -119,8 +129,9 @@ public class AdminService {
 	@GET
 	@Path("getAllCompanies")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllCompanies() {
-		AdminFacad admin = getFacade();
+	public String getAllCompanies() throws Exception {
+		//AdminFacad admin = getFacade();
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
 		Set<Company> companies;
 		try {
 			companies = admin.getAllCompanies();
@@ -132,12 +143,16 @@ public class AdminService {
 	}
 
 	@GET
-	@Path("getCompany")
+	@Path("getCompany/{companyId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCompany(@PathParam("compId") long id) {
-		AdminFacad admin = getFacade();
+	public String getCompany(@PathParam("companyId") long id) throws Exception {
+		System.out.println("the company is");
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
+			System.out.println("the company is");
 			Company company = admin.getCompany(id);
+			System.out.println(company);
 			if (company != null) {
 				return new Gson().toJson(company);
 			} else {
@@ -153,9 +168,9 @@ public class AdminService {
 	@Path("createCustomer")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String Customer(Customer customer) {
-
-		AdminFacad admin = getFacade();
+	public String Customer(Customer customer) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
 			customer = admin.createCustomer(customer);
 			return new Gson().toJson(customer);
@@ -189,8 +204,9 @@ public class AdminService {
 	@Path("updateCustomer")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateCustomer(Customer newCostomer) {
-		AdminFacad admin = getFacade();
+	public String updateCustomer(Customer newCostomer) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
 			Customer oldCustomer = admin.getCustomer(newCostomer.getCustomerId());
 			if (oldCustomer != null) {
@@ -207,8 +223,9 @@ public class AdminService {
 	@GET
 	@Path("getAllCustomers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllCustomers() {
-		AdminFacad admin = getFacade();
+	public String getAllCustomers() throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		Set<Customer> customers;
 		try {
 			customers = admin.getAllCustomers();
@@ -220,12 +237,15 @@ public class AdminService {
 	}
 
 	@GET
-	@Path("getCustomer")
+	@Path("getCustomer/{customerId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCustomer(@QueryParam("custId") long id) {
-		AdminFacad admin = getFacade();
+	public String getCustomer(@PathParam("customerId") long id) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
+		System.out.println(id);
 		try {
 			Customer customer = admin.getCustomer(id);
+			System.out.println(customer);
 			if (customer != null) {
 				return new Gson().toJson(customer);
 			} else {

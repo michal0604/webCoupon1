@@ -19,7 +19,10 @@ import com.google.gson.Gson;
 import com.johnbryce.beans.Company;
 import com.johnbryce.beans.Coupon;
 import com.johnbryce.beans.CouponType;
+import com.johnbryce.facad.AdminFacad;
 import com.johnbryce.facad.CompanyFacade;
+import com.johnbryce.utils.ClientType;
+import com.johnbryce.utils.CouponSystem;
 
 @Path("company")
 public class CompanyService {
@@ -39,10 +42,14 @@ public class CompanyService {
 	@Path("createCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String createCoupon(Coupon coupon) {
-		CompanyFacade companyFacade = getFacade();
+	public String createCoupon(Coupon coupon) throws Exception {
+		CompanyFacade company = (CompanyFacade)CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
 		try {
-			coupon = companyFacade.createCoupon(coupon);
+			System.out.println("the coupon is ");
+			
+			coupon = company.createCoupon(coupon);
+			System.out.println(coupon);
 			return new Gson().toJson(coupon);
 		} catch (Exception e) {
 			return "Failed to Add a new coupon:" + e.getMessage();
@@ -131,11 +138,12 @@ public class CompanyService {
 	@GET
 	@Path("getCoupons")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCoupons() {
-		CompanyFacade companyFacade = getFacade();
+	public String getCoupons() throws Exception {
+		CompanyFacade company = (CompanyFacade)CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
 		Set<Coupon> coupons;
 		try {
-			coupons = companyFacade.getCoupons();
+			coupons = company.getCoupons();
 		} catch (Exception e) {
 			System.err.println("Get Coupons failed: " + e.getMessage());
 			coupons = new HashSet<Coupon>();
