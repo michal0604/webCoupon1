@@ -120,10 +120,11 @@ public class CompanyService {
 	}
 
 	@GET
-	@Path("getCoupon")
+	@Path("getCoupon/{couponId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getCoupon(@PathParam("compId") long id) {
-		CompanyFacade companyFacade = getFacade();
+	public String getCoupon(@PathParam("couponId") long id) throws Exception {
+		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
 		try {
 			Coupon coupon = companyFacade.getCoupon(id);
 			if (coupon != null) {
