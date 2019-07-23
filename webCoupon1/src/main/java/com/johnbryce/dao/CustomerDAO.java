@@ -31,7 +31,7 @@ public interface CustomerDAO {
 	 * @return 
 	 * @throws UpdateException
 	 */
-	long updateCustomer(Customer Customer) throws UpdateException;
+	void updateCustomer(Customer Customer) throws UpdateException;
 
 	/**
 	 * this method get customer and remove it from customer table.

@@ -130,7 +130,7 @@ public class CompanyDBDAO implements CompanyDAO {
 	 * @see projectCoupon.dao.CompanyDAO#updateCompany
 	 */
 	@Override
-	public long updateCompany(Company Company) throws CompanyException {
+	public void updateCompany(Company Company) throws CompanyException {
 		try {
 			pool = ConnectionPool.getInstance();
 		} catch (CouponException e) {
@@ -146,18 +146,12 @@ public class CompanyDBDAO implements CompanyDAO {
 		}
 		try {
 			String sql = "update Company set COMP_NAME= ?,PASSWORD = ?, EMAIL= ? where ID = ?";
-			PreparedStatement stm1 = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stm1 = connection.prepareStatement(sql);
 			stm1.setString(1, Company.getCompName());
 			stm1.setString(2, Company.getPassword());
 			stm1.setString(3, Company.getEmail());
 			stm1.setLong(4, Company.getCompanyId());
 			stm1.executeUpdate();
-			ResultSet rs = stm1.getGeneratedKeys();
-			long generatedKey = 0;
-			if (rs.next()) {
-			    generatedKey = rs.getLong(1);
-			}
-			return generatedKey;
 		} catch (SQLException e) {
 			throw new CompanyException("update company failed " + e.getMessage());
 		} finally {

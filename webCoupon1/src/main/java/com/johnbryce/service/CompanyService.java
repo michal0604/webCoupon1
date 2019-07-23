@@ -7,8 +7,10 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -43,11 +45,11 @@ public class CompanyService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String createCoupon(Coupon coupon) throws Exception {
-		CompanyFacade company = (CompanyFacade)CouponSystem.login("company", "company", ClientType.COMPANY);
-		//CompanyFacade companyFacade = getFacade();
+		CompanyFacade company = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		// CompanyFacade companyFacade = getFacade();
 		try {
 			System.out.println("the coupon is ");
-			
+
 			coupon = company.createCoupon(coupon);
 			System.out.println(coupon);
 			return new Gson().toJson(coupon);
@@ -57,12 +59,12 @@ public class CompanyService {
 
 	}
 
-	@GET
-	@Path("removeCompany")
+	@DELETE
+	@Path("removeCoupon/{companyId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCompany(@PathParam("compId") long id) {
-
-		CompanyFacade companyFacade = getFacade();
+	public String removeCompany(@PathParam("companyId") long id) throws Exception {
+		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
 		try {
 			companyFacade.removeCouponID(id);
 			return "Succeded to remove a coupon:  id = " + id;
@@ -72,13 +74,13 @@ public class CompanyService {
 
 	}
 
-	@POST
+	@PUT
 	@Path("updateCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String updateCoupon(Coupon coupon) {
-
-		CompanyFacade companyFacade = getFacade();
+	public String updateCoupon(Coupon coupon) throws Exception {
+		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
 		try {
 			if (coupon != null) {
 				Coupon oldCoupon = companyFacade.getCoupon(coupon.getCouponId());
@@ -139,62 +141,66 @@ public class CompanyService {
 	@Path("getCoupons")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getCoupons() throws Exception {
-		CompanyFacade company = (CompanyFacade)CouponSystem.login("company", "company", ClientType.COMPANY);
-		//CompanyFacade companyFacade = getFacade();
+		CompanyFacade company = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		// CompanyFacade companyFacade = getFacade();
 		Set<Coupon> coupons;
+
 		try {
 			coupons = company.getCoupons();
+			System.out.println(coupons);
 		} catch (Exception e) {
 			System.err.println("Get Coupons failed: " + e.getMessage());
 			coupons = new HashSet<Coupon>();
 		}
 		return new Gson().toJson(coupons);
 	}
-	
+
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getAllCouponsByType")
-	public String getAllCouponsByType(@PathParam("type")CouponType type) {
-		CompanyFacade companyFacade = getFacade();
-		Set<Coupon>  allCouponsByType=new HashSet<>();
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getAllCouponsByType/{type}")
+	public String getAllCouponsByType(@PathParam("type") CouponType type) throws Exception {
+		CompanyFacade company = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		// CompanyFacade companyFacade = getFacade();
+		Set<Coupon> allCouponsByType = new HashSet<>();
 		try {
-			allCouponsByType=companyFacade.getAllCouponsByType(type);
+			allCouponsByType = company.getAllCouponsByType(type);
 		} catch (Exception e) {
 			System.err.println("Get Coupons by type failed: " + e.getMessage());
 			allCouponsByType = new HashSet<Coupon>();
 		}
 		return new Gson().toJson(allCouponsByType);
 	}
-	
+
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getCouponsByMaxCouponPrice")
-	public String getCouponsByMaxCouponPrice(@PathParam("price") double price) {
-		CompanyFacade companyFacade = getFacade();
-		Set<Coupon>  allCouponsByType=new HashSet<>();
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getCouponsByMaxCouponPrice/{price}")
+	public String getCouponsByMaxCouponPrice(@PathParam("price") double price) throws Exception {
+		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
+		Set<Coupon> allCouponsByType = new HashSet<>();
 		try {
-			allCouponsByType=companyFacade.getCouponsByMaxCouponPrice(price);
+			allCouponsByType = companyFacade.getCouponsByMaxCouponPrice(price);
 		} catch (Exception e) {
 			System.err.println("Get Coupons by max price failed: " + e.getMessage());
 			allCouponsByType = new HashSet<Coupon>();
 		}
 		return new Gson().toJson(allCouponsByType);
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getCouponsByMaxCouponDate")
-	public String getCouponsByMaxCouponDate(@PathParam("date") Date date) {
-		CompanyFacade companyFacade = getFacade();
-		Set<Coupon>  allCouponsByType=new HashSet<>();
+	@Path("/getCouponsByMaxCouponDate/{date}")
+	public String getCouponsByMaxCouponDate(@PathParam("date") Date date) throws Exception {
+		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
+		//CompanyFacade companyFacade = getFacade();
+		Set<Coupon> allCouponsByType = new HashSet<>();
 		try {
-			allCouponsByType=companyFacade.getCouponsByMaxCouponDate(date);
+			allCouponsByType = companyFacade.getCouponsByMaxCouponDate(date);
 		} catch (Exception e) {
 			System.err.println("Get Coupons by max dare failed: " + e.getMessage());
 			allCouponsByType = new HashSet<Coupon>();
 		}
 		return new Gson().toJson(allCouponsByType);
 	}
-
 
 }

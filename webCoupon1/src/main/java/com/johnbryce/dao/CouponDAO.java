@@ -36,7 +36,7 @@ public interface CouponDAO {
 	 * @throws UpdateException for problems in updating the coupon to the DB
 	 * @throws CreateException for problems in inserting the coupon to the DB 
 	 */
-	long updateCoupon(Coupon Coupon) throws UpdateException, CreateException;
+	void updateCoupon(Coupon Coupon) throws UpdateException, CreateException;
 
 
 	/**

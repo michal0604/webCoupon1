@@ -48,7 +48,7 @@ public class CustomerFacad implements CouponClientFacade {
 	 * @param coupId
 	 * @throws CouponException
 	 */
-	public void purchaseCoupon(long coupId) throws CouponException { 
+	public Coupon purchaseCoupon(long coupId) throws CouponException { 
 		if(custId == 0) {
 			throw new CouponException("the operation was canceled due to not being loged in");
 		}
@@ -75,11 +75,21 @@ public class CustomerFacad implements CouponClientFacade {
 						} catch (CreateException e) {
 							throw new CouponException("insert coupon by customer failed");
 						}
-						
+						return coupon;
 					}
 				}
+				else {
+					throw new CouponException("this coupon is out dated cant be bought");
+				}
+			}
+			else {
+				throw new CouponException("you can't but any more of this coupon.");
 			}
 		}
+		else {
+			throw new CouponException("purchase coupon by customer failed");
+		}
+		return coupon;
 	}
 
 

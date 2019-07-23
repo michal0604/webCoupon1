@@ -17,7 +17,10 @@ import javax.ws.rs.core.MediaType;
 import com.johnbryce.beans.Coupon;
 import com.johnbryce.beans.CouponType;
 import com.johnbryce.exception.CouponException;
+import com.johnbryce.facad.CompanyFacade;
 import com.johnbryce.facad.CustomerFacad;
+import com.johnbryce.utils.ClientType;
+import com.johnbryce.utils.CouponSystem;
 
 @Path("customer")
 public class CustomerService {
@@ -31,29 +34,31 @@ public class CustomerService {
 		return customer;
 	}
 	
-	@POST
-	@Path("/purchaseCoupon")
+	@GET
+	@Path("/purchaseCoupon/{couponId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String purchaseCoupon(@QueryParam ("coupId")long coupId)
+	public String purchaseCoupon(@PathParam ("couponId")long coupId) throws Exception
 	{
-		CustomerFacad customer= getFacad();
+		CustomerFacad customer = (CustomerFacad) CouponSystem.login("customer", "customer", ClientType.CUSTOMER);
+		//CustomerFacad customer= getFacad();
 		Coupon coupon= new Coupon();
 		try {
-			customer.purchaseCoupon(coupId);
+			coupon = customer.purchaseCoupon(coupId);
 			
 		}catch (CouponException e) {
 			return "failed to purchase coupon"+e;
 		}
-		return "coupon purchase"+coupon.getTitle();
+		return "coupon purchase "+ coupon.getTitle();
 	}
 
    
 @GET
 @Path("/getAllCouponsByType/{couponType}")
-@Consumes(MediaType.APPLICATION_JSON)
-public Set<Coupon> getAllCouponsByType(@PathParam("couponType") CouponType couponType){
+@Produces(MediaType.APPLICATION_JSON)
+public Set<Coupon> getAllCouponsByType(@PathParam("couponType") CouponType couponType) throws Exception{
+	CustomerFacad customer = (CustomerFacad) CouponSystem.login("customer", "customer", ClientType.CUSTOMER);
 	Set<Coupon>couponByType=new HashSet<>();
-	CustomerFacad customer=getFacad();
+	//CustomerFacad customer=getFacad();
 	try {
 		couponByType=customer.getAllCouponsByType(couponType);
 		
@@ -66,11 +71,12 @@ public Set<Coupon> getAllCouponsByType(@PathParam("couponType") CouponType coupo
 
 	
 @GET
-@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/getAllPurchasedCoupons")
-public Set<Coupon> getAllPurchasedCoupons () {
+public Set<Coupon> getAllPurchasedCoupons () throws Exception {
 	Set<Coupon>allCoupons=new HashSet<>();
-	CustomerFacad customer= getFacad();
+	CustomerFacad customer = (CustomerFacad) CouponSystem.login("customer", "customer", ClientType.CUSTOMER);
+//	CustomerFacad customer= getFacad();
 	try {
 		allCoupons=customer.getAllPurchasedCoupons();
 	} catch (Exception e) {
@@ -80,13 +86,14 @@ public Set<Coupon> getAllPurchasedCoupons () {
 }
 
 @GET
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("/getAllPurchasedCouponsByType")
-public Set<Coupon> getAllPurchasedCouponsByType(@PathParam("type")CouponType type) {
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/getAllPurchasedCouponsByType/{type}")
+public Set<Coupon> getAllPurchasedCouponsByType(@PathParam("type")CouponType type) throws Exception {
 	Set<Coupon>allPurchaseCouponByType=new HashSet<>();
-	CustomerFacad customer=getFacad();
+	CustomerFacad customer = (CustomerFacad) CouponSystem.login("customer", "customer", ClientType.CUSTOMER);
+	//CustomerFacad customer=getFacad();
 	try {
-		allPurchaseCouponByType=customer.getAllCouponsByType(type);
+		allPurchaseCouponByType=customer.getAllPurchasedCouponsByType(type);
 	} catch (Exception e) {
 		System.out.println(e);	
 	}
@@ -94,10 +101,11 @@ public Set<Coupon> getAllPurchasedCouponsByType(@PathParam("type")CouponType typ
 }
 
 @GET
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("/getAllPurchasedCouponsByPrice")
-public Set<Coupon> getAllPurchasedCouponsByPrice(@PathParam("price")long price) {
-	CustomerFacad customer=getFacad();
+@Produces(MediaType.APPLICATION_JSON)
+@Path("/getAllPurchasedCouponsByPrice/{price}")
+public Set<Coupon> getAllPurchasedCouponsByPrice(@PathParam("price")long price) throws Exception {
+	CustomerFacad customer = (CustomerFacad) CouponSystem.login("customer", "customer", ClientType.CUSTOMER);
+	//CustomerFacad customer=getFacad();
 	Set<Coupon>allPurchasedCouponsByPrice=new HashSet<>();
 	try {
 		allPurchasedCouponsByPrice=customer.getAllPurchasedCouponsByPrice(price);

@@ -86,15 +86,17 @@ public class AdminService {
 
 
 	@DELETE
-	@Path("removeCompany")
+	@Path("removeCompany/{companyId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCompany(@PathParam("compId") long id) {
-
-		AdminFacad admin = getFacade();
+	public String removeCompany(@PathParam("companyId") long id) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+		//AdminFacad admin = getFacade();
 		try {
 			Company company = admin.getCompany(id);
 			if (company != null) {
+				System.out.println("delete company id");
 				admin.removeCompany(company);
+				System.out.println(company);
 				return "Succeded to remove a company: name = " + company.getCompName() + ", id = " + id;
 			} else {
 				return "Failed to remove a company: the provided company id is invalid";

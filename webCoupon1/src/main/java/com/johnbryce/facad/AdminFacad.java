@@ -149,9 +149,9 @@ public class AdminFacad implements CouponClientFacade {
 		company.setEmail(newEmail);
 		try {
 			companyDAO.updateCompany(company);
-			return companyDAO.getCompany(company.getCompanyId());
+			return company;
 
-		} catch (CompanyException | SQLException e) {
+		} catch (CompanyException e) {
 			throw new CouponException("update company by admin failed");
 		}
 
@@ -274,8 +274,8 @@ public class AdminFacad implements CouponClientFacade {
 		customer.setPassword(newpassword);
 		try {
 			customerDAO.updateCustomer(customer);
-			return customerDAO.getCustomer(customer.getCustomerId());
-		} catch (UpdateException | CustomerException e) {
+			return customer;
+		} catch (UpdateException e) {
 			throw new CouponException("update customer by admin failed");
 		}
 
