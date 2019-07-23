@@ -112,13 +112,20 @@ public class CompanyFacade implements CouponClientFacade {
 							System.out.println("create coupon by company success!!");
 							return coupon;
 						} else {
-							System.out.println("Coupon Title is Already Exists! Create New Coupon is Canceled!");
+							throw new CouponException("Coupon Title is Already Exists! Create New Coupon is Canceled!");
 						}
+					}else {
+						throw new CouponException("invalid coupon start time is in the past");
 					}
+				}else {
+					throw new CouponException("invalid coupon start time in after the end time");
 				}
+			}else {
+				throw new CouponException("invalid coupon has no title");
 			}
+		}else {
+			throw new CouponException("invalid null coupon");
 		}
-		return coupon;
 	}
 
 	/**
