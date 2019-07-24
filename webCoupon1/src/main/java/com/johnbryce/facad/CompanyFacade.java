@@ -101,7 +101,6 @@ public class CompanyFacade implements CouponClientFacade {
 				if (startDate.getTime() <= endDate.getTime()) {
 					if (startDate.getTime() >= Utile.getCurrentDate().getTime()) {
 						if (!couponDAO.isCouponTitleExists(CoupTitle)) {
-							couponDAO.insertCoupon(coupon);
 							long id = couponDAO.insertCoupon(coupon);
 							if (id != 0) {
 								coupon = couponDAO.getCoupon(id);
