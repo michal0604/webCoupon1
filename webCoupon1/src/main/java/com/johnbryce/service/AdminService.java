@@ -107,7 +107,7 @@ public class AdminService {
 
 	}
 
-	@PUT
+	@POST
 	@Path("updateCompany")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -116,8 +116,10 @@ public class AdminService {
 		//AdminFacad admin = getFacade();
 		try {
 			Company oldCompany = admin.getCompany(newCompany.getCompanyId());
+			System.out.println("before update componay "+ oldCompany);
 			if (oldCompany != null) {
 				newCompany = admin.updateCompany(oldCompany, newCompany.getPassword(), newCompany.getEmail());
+				System.out.println("after update componay "+ newCompany);
 				return new Gson().toJson(newCompany);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
@@ -181,12 +183,12 @@ public class AdminService {
 		}
 	}
 
-	@GET
-	@Path("removeCustomer")
+	@DELETE
+	@Path("removeCustomer/{customerId}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCustomer(@QueryParam("custId") long id) {
-
-		AdminFacad admin = getFacade();
+	public String removeCustomer(@PathParam("customerId") long id) throws Exception {
+		AdminFacad admin = (AdminFacad)CouponSystem.login("admin", "1234", ClientType.ADMIN);
+	//	AdminFacad admin = getFacade();
 
 		try {
 			Customer customer = admin.getCustomer(id);
@@ -202,7 +204,7 @@ public class AdminService {
 
 	}
 
-	@PUT
+	@POST
 	@Path("updateCustomer")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -211,6 +213,7 @@ public class AdminService {
 		//AdminFacad admin = getFacade();
 		try {
 			Customer oldCustomer = admin.getCustomer(newCostomer.getCustomerId());
+			
 			if (oldCustomer != null) {
 				newCostomer = admin.updateCustomer(oldCustomer, newCostomer.getPassword());
 				return new Gson().toJson(newCostomer);
