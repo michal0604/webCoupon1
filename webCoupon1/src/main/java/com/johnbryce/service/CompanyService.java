@@ -59,9 +59,9 @@ public class CompanyService {
 	}
 
 	@DELETE
-	@Path("removeCoupon/{companyId}")
+	@Path("removeCoupon/{couponID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCompany(@PathParam("companyId") long id) throws Exception {
+	public String removeCompany(@PathParam("couponID") long id) throws Exception {
 		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
 		//CompanyFacade companyFacade = getFacade();
 		try {
