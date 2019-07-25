@@ -147,7 +147,7 @@ public class CompanyFacade implements CouponClientFacade {
 				couponDAO.removeCouponID(coupId);
 				System.out.println("company succsess to remove coupon!");
 			} else {
-				System.out.println("remove coupon failed");
+				throw new Exception ("coupon does not belong to company");
 			}
 
 		}

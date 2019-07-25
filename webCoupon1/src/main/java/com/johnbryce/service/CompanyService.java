@@ -83,16 +83,10 @@ public class CompanyService {
 		try {
 			if (coupon != null) {
 				Coupon oldCoupon = companyFacade.getCoupon(coupon.getCouponId());
-				oldCoupon.setTitle(coupon.getTitle());
-				oldCoupon.setStart_date(coupon.getStart_date());
 				oldCoupon.setEnd_date(coupon.getEnd_date());
-				oldCoupon.setAmount(coupon.getAmount());
-				oldCoupon.setType(coupon.getType());
-				oldCoupon.setMessage(coupon.getMessage());
 				oldCoupon.setPrice(coupon.getPrice());
-				oldCoupon.setImage(coupon.getImage());
 				oldCoupon = companyFacade.updateCoupon(oldCoupon);
-				return new Gson().toJson(coupon);
+				return new Gson().toJson(oldCoupon);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
 			}
