@@ -101,7 +101,6 @@ public class CompanyFacade implements CouponClientFacade {
 				if (startDate.getTime() <= endDate.getTime()) {
 					if (startDate.getTime() >= Utile.getCurrentDate().getTime()) {
 						if (!couponDAO.isCouponTitleExists(CoupTitle)) {
-							couponDAO.insertCoupon(coupon);
 							long id = couponDAO.insertCoupon(coupon);
 							if (id != 0) {
 								coupon = couponDAO.getCoupon(id);
@@ -148,7 +147,7 @@ public class CompanyFacade implements CouponClientFacade {
 				couponDAO.removeCouponID(coupId);
 				System.out.println("company succsess to remove coupon!");
 			} else {
-				System.out.println("remove coupon failed");
+				throw new Exception ("coupon does not belong to company");
 			}
 
 		}

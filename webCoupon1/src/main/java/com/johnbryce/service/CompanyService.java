@@ -49,7 +49,6 @@ public class CompanyService {
 		// CompanyFacade companyFacade = getFacade();
 		try {
 			System.out.println("the coupon is ");
-
 			coupon = company.createCoupon(coupon);
 			System.out.println(coupon);
 			return new Gson().toJson(coupon);
@@ -60,9 +59,9 @@ public class CompanyService {
 	}
 
 	@DELETE
-	@Path("removeCoupon/{companyId}")
+	@Path("removeCoupon/{couponID}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String removeCompany(@PathParam("companyId") long id) throws Exception {
+	public String removeCompany(@PathParam("couponID") long id) throws Exception {
 		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
 		//CompanyFacade companyFacade = getFacade();
 		try {
@@ -85,19 +84,13 @@ public class CompanyService {
 			if (coupon != null) {
 				Coupon oldCoupon = companyFacade.getCoupon(coupon.getCouponId());
 				System.out.println("the old coupn is: " + oldCoupon);
-				oldCoupon.setTitle(coupon.getTitle());
-				oldCoupon.setStart_date(coupon.getStart_date());
 				oldCoupon.setEnd_date(coupon.getEnd_date());
-				oldCoupon.setAmount(coupon.getAmount());
-				oldCoupon.setType(coupon.getType());
-				oldCoupon.setMessage(coupon.getMessage());
 				oldCoupon.setPrice(coupon.getPrice());
-				oldCoupon.setImage(coupon.getImage());
 				oldCoupon = companyFacade.updateCoupon(oldCoupon);
 				System.out.println("the new"
 						+ ""
 						+ " coupn is: " + oldCoupon);
-				return new Gson().toJson(coupon);
+				return new Gson().toJson(oldCoupon);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
 			}
@@ -192,17 +185,18 @@ public class CompanyService {
 		return new Gson().toJson(allCouponsByType);
 	}
 
-	@GET
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Path("/getCouponsByMaxCouponDate/{date}")
-	public String getCouponsByMaxCouponDate(@PathParam("date") Date date) throws Exception {
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getCouponsByMaxCouponDate")
+	public String getCouponsByMaxCouponDate(Coupon date) throws Exception {
 		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
 		//CompanyFacade companyFacade = getFacade();
 		Set<Coupon> allCouponsByType = new HashSet<>();
 		try {
-			allCouponsByType = companyFacade.getCouponsByMaxCouponDate(date);
+			allCouponsByType = companyFacade.getCouponsByMaxCouponDate(date.getEnd_date());
 		} catch (Exception e) {
-			System.err.println("Get Coupons by max dare failed: " + e.getMessage());
+			System.err.println("Get Coupons by max date failed: " + e.getMessage());
 			allCouponsByType = new HashSet<Coupon>();
 		}
 		return new Gson().toJson(allCouponsByType);
