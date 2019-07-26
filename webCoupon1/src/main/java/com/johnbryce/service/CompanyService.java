@@ -74,7 +74,7 @@ public class CompanyService {
 
 	}
 
-	@PUT
+	@POST
 	@Path("updateCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -84,6 +84,7 @@ public class CompanyService {
 		try {
 			if (coupon != null) {
 				Coupon oldCoupon = companyFacade.getCoupon(coupon.getCouponId());
+				System.out.println("the old coupn is: " + oldCoupon);
 				oldCoupon.setTitle(coupon.getTitle());
 				oldCoupon.setStart_date(coupon.getStart_date());
 				oldCoupon.setEnd_date(coupon.getEnd_date());
@@ -93,6 +94,9 @@ public class CompanyService {
 				oldCoupon.setPrice(coupon.getPrice());
 				oldCoupon.setImage(coupon.getImage());
 				oldCoupon = companyFacade.updateCoupon(oldCoupon);
+				System.out.println("the new"
+						+ ""
+						+ " coupn is: " + oldCoupon);
 				return new Gson().toJson(coupon);
 			} else {
 				return "Failed to update a company: the provided company id is invalid";
@@ -158,8 +162,8 @@ public class CompanyService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getAllCouponsByType/{type}")
-	public String getAllCouponsByType(@PathParam("type") CouponType type) throws Exception {
+	@Path("/getAllCouponsByType/{couponType}")
+	public String getAllCouponsByType(@PathParam("couponType") CouponType type) throws Exception {
 		CompanyFacade company = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
 		// CompanyFacade companyFacade = getFacade();
 		Set<Coupon> allCouponsByType = new HashSet<>();
