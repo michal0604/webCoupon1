@@ -10,7 +10,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
 import com.johnbryce.beans.Company;
 import com.johnbryce.beans.Coupon;
 import com.johnbryce.beans.CouponType;
-import com.johnbryce.facad.AdminFacad;
 import com.johnbryce.facad.CompanyFacade;
 import com.johnbryce.utils.ClientType;
 import com.johnbryce.utils.CouponSystem;
@@ -185,16 +183,16 @@ public class CompanyService {
 		return new Gson().toJson(allCouponsByType);
 	}
 
-	@POST
+	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("getCouponsByMaxCouponDate")
-	public String getCouponsByMaxCouponDate(Coupon date) throws Exception {
+	@Path("/getCouponsByMaxCouponDate/{date}")
+	public String getCouponsByMaxCouponDate(@PathParam("date") Date date) throws Exception {
 		CompanyFacade companyFacade = (CompanyFacade) CouponSystem.login("company", "company", ClientType.COMPANY);
 		//CompanyFacade companyFacade = getFacade();
 		Set<Coupon> allCouponsByType = new HashSet<>();
 		try {
-			allCouponsByType = companyFacade.getCouponsByMaxCouponDate(date.getEnd_date());
+			allCouponsByType = companyFacade.getCouponsByMaxCouponDate(date);
 		} catch (Exception e) {
 			System.err.println("Get Coupons by max date failed: " + e.getMessage());
 			allCouponsByType = new HashSet<Coupon>();

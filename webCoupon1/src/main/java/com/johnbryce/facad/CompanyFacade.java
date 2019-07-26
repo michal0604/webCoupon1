@@ -221,7 +221,7 @@ public class CompanyFacade implements CouponClientFacade {
 			System.out.println("the operation was canceled due to not being loged in");
 		}
 		Set<Coupon> allCoupons = new HashSet<Coupon>();
-		allCoupons = couponDAO.getAllCoupons();
+		allCoupons = companyDAO.getAllCoupons(companyId);
 		return allCoupons;
 	}
 
