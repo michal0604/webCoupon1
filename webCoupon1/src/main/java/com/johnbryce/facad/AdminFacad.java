@@ -93,7 +93,7 @@ public class AdminFacad implements CouponClientFacade {
 							}
 
 						} else {
-							throw new CouponException("create company failed by admin name");
+							throw new CouponException("create company failed by company name");
 						}
 					} catch (SQLException e) {
 						throw new CouponException("create company failed by admin " + e.getMessage());
@@ -213,7 +213,6 @@ public class AdminFacad implements CouponClientFacade {
 				if (customer.getPassword() != null) {
 					try {
 						if (!customerDAO.isCustomerNameExists(custName)) {
-							customerDAO.insertCustomer(customer);
 							long id = customerDAO.insertCustomer(customer);
 							if (id != 0) {
 								return customerDAO.getCustomer(id);
@@ -221,14 +220,20 @@ public class AdminFacad implements CouponClientFacade {
 								throw new CouponException("create customer failed by admin");
 							}
 
+						}else {
+							throw new CouponException("A customer with the same name already exist");
 						}
 					} catch (CustomerException e) {
-						throw new CouponException("create customer by admin failed");
+						throw new CouponException(e.getMessage());
 
 					} catch (CreateException e) {
-						throw new CouponException("create customer by admin failed");
+						throw new CouponException(e.getMessage());
 					}
+				}else {
+					throw new CouponException("the customer has a null password");
 				}
+			}else {
+				throw new CouponException("the customer user name is empty");
 			}
 		}
 		return customer;
